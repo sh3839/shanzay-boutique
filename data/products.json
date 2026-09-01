@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1787912267146,
+    "name": "summur lawn suit",
+    "price": "2800",
+    "description": "Beautiful summer collection by Shanzay Boutique",
+    "image": "/uploads/1787912266454.jpg",
+    "salePrice": "",
+    "category": "Other",
+    "featured": false,
+    "isNew": false
+  },
+  {
+    "id": 1788033412021,
+    "name": "test dress",
+    "price": "2500",
+    "salePrice": "",
+    "description": "",
+    "category": "Lawn",
+    "featured": false,
+    "isNew": false,
+    "image": "/uploads/1788033411948.jpg"
+  },
+  {
+    "id": 1788033445430,
+    "name": "test dress",
+    "price": "2500",
+    "salePrice": "",
+    "description": "nice stuff",
+    "category": "Lawn",
+    "featured": true,
+    "isNew": true,
+    "image": "/uploads/1788033445352.jpg"
+  },
+  {
+    "id": 1788033551948,
+    "name": "test dress",
+    "price": "2500",
+    "salePrice": "",
+    "description": "nice suit",
+    "category": "Lawn",
+    "featured": false,
+    "isNew": false,
+    "image": "/uploads/1788033551792.jpg"
+  },
+  {
+    "id": 1788033568933,
+    "name": "test dress",
+    "price": "2500",
+    "salePrice": "",
+    "description": "",
+    "category": "Lawn",
+    "featured": false,
+    "isNew": false,
+    "image": "/uploads/1788033568859.jpg"
+  },
+  {
+    "id": 1788155269185,
+    "name": "Test Dress 2",
+    "price": "2550",
+    "salePrice": "",
+    "description": "",
+    "category": "Lawn",
+    "featured": true,
+    "isNew": true,
+    "image": "/uploads/1788155268386.jpg"
+  }
+]

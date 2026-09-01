@@ -1,0 +1,1082 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shanzay Boutique</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff8f5;
+    color: #333;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: white;
+    padding: 10px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-img {
+    width: 125px;
+    height: 85px;
+    object-fit: contain;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 22px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #9b5c65;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 560px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(
+        135deg,
+        #f9e8e5,
+        #fff8f5
+    );
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 900px;
+}
+
+
+/* LOGO ABOVE SHANZAY BOUTIQUE */
+
+.hero-logo {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+
+/* MAIN TITLE */
+
+.hero h1 {
+    font-size: 58px;
+    color: #8d4f59;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.btn {
+    display: inline-block;
+    background: #9b5c65;
+    color: white;
+    padding: 13px 25px;
+    border-radius: 30px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #7f4750;
+}
+
+.whatsapp-btn {
+    background: #25D366;
+    margin-top: 10px;
+}
+
+.whatsapp-btn:hover {
+    background: #1da851;
+}
+
+
+/* ================= COLLECTION ================= */
+
+.collection {
+    padding: 60px 7%;
+}
+
+.collection h2 {
+    text-align: center;
+    font-size: 35px;
+    color: #8d4f59;
+    margin-bottom: 30px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.controls {
+    display: flex;
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    flex-wrap: wrap;
+}
+
+.search {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 15px;
+}
+
+select {
+    padding: 13px 18px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background: white;
+}
+
+
+/* ================= PRODUCTS ================= */
+
+.products {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.product {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    background: #eee;
+}
+
+
+/* ================= BADGES ================= */
+
+.badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: #9b5c65;
+    color: white;
+    padding: 6px 9px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.sale {
+    background: #222;
+}
+
+
+/* ================= PRODUCT INFO ================= */
+
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    margin-bottom: 8px;
+}
+
+.category {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #9b5c65;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 14px;
+    margin-left: 7px;
+}
+
+.description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.order-btn {
+    width: 100%;
+}
+
+
+/* ================= LOADING ================= */
+
+.loading,
+.no-products {
+    text-align: center;
+    color: #777;
+    padding: 30px;
+    grid-column: 1 / -1;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #8d4f59;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+
+/* ================= ORDER MODAL ================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 500;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-box {
+    background: white;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.modal-box h2 {
+    color: #8d4f59;
+    margin-bottom: 8px;
+}
+
+.close {
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+textarea.form-input {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.order-product {
+    background: #fff8f5;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-img {
+        width: 105px;
+        height: 70px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    .hero {
+        min-height: 520px;
+    }
+
+    .hero-logo {
+        width: 145px;
+        height: 145px;
+        margin-bottom: 15px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    select {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <img
+        src="/images/logo.png"
+        alt="Shanzay Boutique Logo"
+        class="logo-img"
+    >
+
+    <nav>
+
+        <a href="#">Home</a>
+
+        <a href="#collection">
+            Collection
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <img
+            src="/images/logo.png"
+            alt="Shanzay Boutique Logo"
+            class="hero-logo"
+        >
+
+        <h1>
+            Shanzay Boutique
+        </h1>
+
+        <p>
+            Elegant Fashion • Beautiful Designs • Your Style
+        </p>
+
+        <a
+            href="#collection"
+            class="btn"
+        >
+            View Collection
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COLLECTION ================= -->
+
+<section
+    class="collection"
+    id="collection"
+>
+
+    <h2>
+        Our Collection
+    </h2>
+
+    <div class="controls">
+
+        <input
+            class="search"
+            id="search"
+            type="text"
+            placeholder="Search products..."
+            oninput="displayProducts()"
+        >
+
+        <select
+            id="category"
+            onchange="displayProducts()"
+        >
+
+            <option value="all">
+                All Categories
+            </option>
+
+        </select>
+
+    </div>
+
+    <div
+        class="products"
+        id="products"
+    >
+
+        <div class="loading">
+            Loading collection...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ORDER MODAL ================= -->
+
+<div
+    class="modal"
+    id="orderModal"
+>
+
+    <div class="modal-box">
+
+        <span
+            class="close"
+            onclick="closeOrder()"
+        >
+            ×
+        </span>
+
+        <h2>
+            Place Your Order
+        </h2>
+
+        <div
+            class="order-product"
+            id="orderProduct"
+        ></div>
+
+        <input
+            class="form-input"
+            id="customerName"
+            placeholder="Your Name"
+        >
+
+        <input
+            class="form-input"
+            id="phone"
+            type="tel"
+            placeholder="Phone Number"
+        >
+
+        <input
+            class="form-input"
+            id="city"
+            placeholder="City"
+        >
+
+        <textarea
+            class="form-input"
+            id="address"
+            placeholder="Complete Delivery Address"
+        ></textarea>
+
+        <input
+            class="form-input"
+            id="quantity"
+            type="number"
+            min="1"
+            value="1"
+            placeholder="Quantity"
+        >
+
+        <button
+            class="btn whatsapp-btn order-btn"
+            onclick="placeOrder()"
+        >
+            💬 Order on WhatsApp
+        </button>
+
+        <div id="orderMessage"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+    <p>
+        © 2026 Shanzay Boutique.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+let products = [];
+
+let selectedProduct = null;
+
+
+const WHATSAPP_NUMBER =
+    "923167860408";
+
+
+async function loadProducts() {
+
+    const container =
+        document.getElementById("products");
+
+    try {
+
+        const response =
+            await fetch("/api/products");
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load products"
+            );
+
+        }
+
+        products =
+            await response.json();
+
+        loadCategories();
+
+        displayProducts();
+
+    } catch (error) {
+
+        container.innerHTML =
+            `
+            <div class="no-products">
+                Unable to load collection.
+            </div>
+            `;
+
+        console.error(error);
+
+    }
+
+}
+
+
+function loadCategories() {
+
+    const categorySelect =
+        document.getElementById("category");
+
+    const categories =
+        [
+            ...new Set(
+                products
+                    .map(p => p.category)
+                    .filter(Boolean)
+            )
+        ];
+
+    categorySelect.innerHTML =
+        `
+        <option value="all">
+            All Categories
+        </option>
+        `;
+
+    categories.forEach(
+        category => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                category;
+
+            option.textContent =
+                category;
+
+            categorySelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+function displayProducts() {
+
+    const container =
+        document.getElementById("products");
+
+    const search =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+    const category =
+        document
+            .getElementById("category")
+            .value;
+
+    const filtered =
+        products.filter(
+            product => {
+
+                const productName =
+                    String(
+                        product.name || ""
+                    ).toLowerCase();
+
+                const matchesSearch =
+                    productName.includes(
+                        search
+                    );
+
+                const matchesCategory =
+                    category === "all" ||
+                    product.category === category;
+
+                return (
+                    matchesSearch &&
+                    matchesCategory
+                );
+
+            }
+        );
+
+    if (!filtered.length) {
+
+        container.innerHTML =
+            `
+            <div class="no-products">
+                No products found.
+            </div>
+            `;
+
+        return;
+
+    }
+
+    container.innerHTML = "";
+
+    filtered.forEach(
+        product => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "product";
+
+            const image =
+                product.images &&
+                product.images.length
+                    ? product.images[0]
+                    : product.image || "";
+
+            let priceHTML = "";
+
+            if (product.salePrice) {
+
+                priceHTML =
+                    `
+                    <span class="price">
+                        Rs. ${product.salePrice}
+                    </span>
+
+                    <span class="old-price">
+                        Rs. ${product.price}
+                    </span>
+                    `;
+
+            } else {
+
+                priceHTML =
+                    `
+                    <span class="price">
+                        Rs. ${product.price}
+                    </span>
+                    `;
+
+            }
+
+            div.innerHTML =
+                `
+
+                <div style="position:relative;">
+
+                    ${
+                        image
+                        ?
+                        `
+                        <img
+                            class="product-image"
+                            src="${image}"
+                            alt="${product.name}"
+                        >
+                        `
+                        :
+                        `
+                        <div
+                            class="product-image"
+                            style="
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                            "
+                        >
+                            No Image
+                        </div>
+                        `
+                    }
+
+                    <div class="badges">
+
+                        ${
+                            product.isNew
+                            ?
+                            `
+                            <span class="badge">
+                                NEW
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                        ${
+                            product.featured
+                            ?
+                            `
+                            <span class="badge">
+                                FEATURED
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                        ${
+                            product.salePrice
+                            ?
+                            `
+                            <span class="badge sale">
+                                SALE
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                    <div class="category">
+                        ${
+                            product.category ||
+                            "Other"
+                        }
+                    </div>
+
+                    <div>
+                        ${priceHTML}
+                    </div>
+
+                    ${
+                        product.description
+                        ?
+                        `
+                        <p class="description">
+                            ${product.description}
+                        </p>
+                        `
+                        :
+                        ""
+                    }
+
+                    <button
+                        class="btn order-btn"
+                        onclick="openOrder(${product.id})"
+                    >
+                        Order Now
+                    </button>
+
+                </div>
+
+                `;
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+function openOrder(id) {
+
+    selectedProduct =
+        products.find(
+            product =>
+                product.id === id
+        );
+
+    if (!selectedProduct) {
+        return;
+    }
+
+    const price =
+        selectedProduct.salePrice ||
+        selectedProduct.price;
+
+    document.getElementById(
+        "orderProduct"
+    ).innerHTML =
+        `
+
+        <strong>
+            ${selectedProduct.name}
+        </strong>
+
+        <br>
+
+        Category:
+        ${
+            selectedProduct.category ||
+            "Other"
+        }
+
+        <br>
+
+        Price:
+        Rs. ${price}
+
+        `;
+
+    document.getElementById(
+        "orderModal"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "orderMessage"
+    ).innerHTML =
+        "";
+
+}
+
+
+function closeOrder() {
+
+    document.getElementById(
+        "orderModal"
+    ).style.display =
+        "none";
+
+}
+
+
+function placeOrder() {
+
+    if (!selectedProduct) {
+        return;
+    }
+
+    const customerName =
+        document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+    const phone =
+        document
+            .getElementById("phone")
+            .value
+            .trim();
+
+    const city =
+        document
+            .getElementById("city")
+            .value
+            .trim();
+
+    const address =
+        document
+            .getElementById("address")
+            .value
+            .trim();
+
+    const quantity =
+        document
+            .getElementById("quantity")
+            .value;
+
+    if (
+        !customerName ||
+        !phone ||
+        !address
+    ) {
+
+        alert(
+            "Please fill Name, Phone and Address."
+        );
+
+        return;
+
+    }
+
+    const price =
+        selectedProduct.salePrice ||
+        selectedProduct.price;
+
+    const total =
+        Number(price) *
+        Number(quantity);
+
+    const message =
+
+`Assalam-o-Alaikum Shanzay Boutique!
+
+I want to place an order.
+
+Product: ${selectedProduct.name}
+Category: ${
+    selectedProduct.category ||
+    "Other"
+}
+Price: Rs. ${price}
+Quantity: ${quantity}
+Total: Rs. ${total}
+
+Customer Name: ${customerName}
+Customer Phone: ${phone}
+City: ${city}
+Delivery Address: ${address}
+
+Please confirm my order. Thank you!`;
+
+    const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+
+window.onclick =
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "orderModal"
+            );
+
+        if (
+            event.target === modal
+        ) {
+
+            closeOrder();
+
+        }
+
+    };
+
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
+```
