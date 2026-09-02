@@ -4,6 +4,16 @@ const fs = require("fs");
 const multer = require("multer");
 
 const app = express();
+
+// Admin password protection
+function requireAdmin(req, res, next) {
+    const password = req.headers['x-admin-password'];
+    if (!process.env.ADMIN_PASSWORD || password !== process.env.ADMIN_PASSWORD) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    next();
+}
+
 const PORT = process.env.PORT || 3000;
 
 const productsFile = path.join(__dirname, "data", "products.json");
