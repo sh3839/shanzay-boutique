@@ -5,22 +5,12 @@ const multer = require("multer");
 
 const app = express();
 
-// Admin password protection
-function requireAdmin(req, res, next) {
-    const password = req.headers['x-admin-password'];
-    if (!process.env.ADMIN_PASSWORD || password !== process.env.ADMIN_PASSWORD) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-    next();
-}
-
 const PORT = process.env.PORT || 3000;
 
 const productsFile = path.join(__dirname, "data", "products.json");
-
-// Create upload folder if it doesn't exist
 const uploadDir = path.join(__dirname, "public", "uploads");
 
+// Create upload folder
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -42,9 +32,57 @@ const upload = multer({
     storage: storage
 });
 
+// Basic admin authentication
+function adminAuth(req, res, next) {
+    const auth = req.headers.authorization;
+
+    if (!auth || !auth.startsWith("Basic ")) {
+        res.setHeader(
+            "WWW-Authenticate",
+            'Basic realm="Shanzay Boutique Admin"'
+        );
+        return res.status(401).send("Admin login required.");
+    }
+
+    try {
+        const decoded = Buffer.from(
+            auth.substring(6),
+            "base64"
+        ).toString("utf8");
+
+        const separator = decoded.indexOf(":");
+        const password = separator >= 0
+            ? decoded.substring(separator + 1)
+            : "";
+
+        if (
+            !process.env.ADMIN_PASSWORD ||
+            password !== process.env.ADMIN_PASSWORD
+        ) {
+            res.setHeader(
+                "WWW-Authenticate",
+                'Basic realm="Shanzay Boutique Admin"'
+            );
+            return res.status(401).send("Invalid admin password.");
+        }
+
+        next();
+    } catch (error) {
+        res.setHeader(
+            "WWW-Authenticate",
+            'Basic realm="Shanzay Boutique Admin"'
+        );
+        return res.status(401).send("Invalid login.");
+    }
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Protect admin panel
+app.use("/admin", adminAuth);
+
+// Public website files
 app.use(express.static(path.join(__dirname, "public")));
 
 // Get products
@@ -71,9 +109,8 @@ app.get("/api/products", (req, res) => {
     res.json(getProducts());
 });
 
-// Upload image
-app.post("/api/upload", upload.single("image"), (req, res) => {
-
+// Upload image — protected
+app.post("/api/upload", adminAuth, upload.single("image"), (req, res) => {
     if (!req.file) {
         return res.status(400).json({
             error: "No image uploaded."
@@ -85,9 +122,8 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
     });
 });
 
-// Add product
-app.post("/api/products", (req, res) => {
-
+// Add product — protected
+app.post("/api/products", adminAuth, (req, res) => {
     const {
         name,
         price,
@@ -112,15 +148,13 @@ app.post("/api/products", (req, res) => {
     };
 
     products.push(newProduct);
-
     saveProducts(products);
 
     res.status(201).json(newProduct);
 });
 
-// Update product
-app.put("/api/products/:id", (req, res) => {
-
+// Update product — protected
+app.put("/api/products/:id", adminAuth, (req, res) => {
     const products = getProducts();
 
     const product = products.find(
@@ -159,9 +193,8 @@ app.put("/api/products/:id", (req, res) => {
     res.json(product);
 });
 
-// Delete product
-app.delete("/api/products/:id", (req, res) => {
-
+// Delete product — protected
+app.delete("/api/products/:id", adminAuth, (req, res) => {
     const products = getProducts();
 
     const updatedProducts = products.filter(
@@ -181,6 +214,9 @@ app.get("/", (req, res) => {
         path.join(__dirname, "public", "index.html")
     );
 });
-app.listen(PORT, '0.0.0.0', () => {
-    console.log('Shanzay Boutique is running on port ' + PORT);
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(
+        "Shanzay Boutique is running on port " + PORT
+    );
 });
